@@ -93,7 +93,10 @@ class Protocol extends Node
     protected function initialize(): void
     {
         $root  = dirname(__DIR__, 3);
-        $argv0 = realpath($_SERVER['argv'][0]);
+        $argv0 = false;
+        if ('cli' === PHP_SAPI) {
+            $argv0 = realpath($_SERVER['argv'][0]);
+        }
 
         $cwd =
             'cli' === PHP_SAPI
